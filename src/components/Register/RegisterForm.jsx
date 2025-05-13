@@ -1,9 +1,6 @@
-import React from "react";
-import axios from "axios";
+import classNames from "classnames";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import classNames from "classnames";
-import { ROUTES } from "../../utils/routes";
 import { axiosInstance } from "../../utils/axios";
 
 const RegisterForm = () => {
@@ -19,7 +16,7 @@ const RegisterForm = () => {
 
   async function registerUser(registerData) {
     try {
-      const {data} = await axiosInstance.post("/auth/register", registerData)
+      const { data } = await axiosInstance.post("/auth/register", registerData);
       console.log(data);
     } catch (error) {
       console.log("Axios error: ", error);
@@ -31,7 +28,7 @@ const RegisterForm = () => {
       delete data.confirmPass;
       await registerUser(data);
       // navigate(ROUTES.DOCUMENTS_PAGE);
-      } catch (error) {
+    } catch (error) {
       console.log("Error: ", error);
     }
   }

@@ -1,12 +1,25 @@
 import classes from "./Popup.module.css";
 
-const Popup = () => {
-    const popupClasses = [classes.popup]
+const Popup = ({ popupVisible, children, setPopupVisible }) => {
+  const popupClasses = [classes.popup];
 
-    popupClasses.push(classes.active)
+  if (popupVisible) {
+    popupClasses.push(classes.active);
+  }
+
   return (
-    <div className={popupClasses.join(" ")}>
-      <div className={classes.popupContent}>Hello world</div>
+    <div
+      className={popupClasses.join(" ")}
+      onClick={() => {
+        setPopupVisible(false);
+      }}
+    >
+      <div
+        className={classes.popupContent}
+        onClick={(e) => {e.stopPropagation()}}
+      >
+        {children}
+      </div>
     </div>
   );
 };

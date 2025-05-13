@@ -5,7 +5,7 @@ const AdminList = ({usersList}) => {
   return (
     <div className="admin-list">
         {
-            usersList.map((user) => <AdminItem name={user.name} surname={user.surname} email={user.email} role={user.role}/>)
+            usersList.map((user) => <AdminItem key={user.user_id} name={user.name} surname={user.surname} email={user.email} role={user.role}/>)
         }
     </div>
   );
