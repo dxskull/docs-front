@@ -152,6 +152,24 @@ input[type="number"]::-webkit-inner-spin-button {
     border: 2px solid transparent;
 }
 
+
+/* ICONS  */
+.close-icon {
+    height: 30px;
+    width: 30px;
+    padding: 2px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.close-icon:hover {
+    background-color: #eceaea;
+    
+}
+
 /* NAVBAR  */
 
 .nav {
@@ -367,6 +385,11 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 100%;
     font-size: 14px;
     padding: 3px 1px;
+}
+
+.admin-form-container {
+    position: relative;
+    padding: 30px;
 }
 
 .admin-form {

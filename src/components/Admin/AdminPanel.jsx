@@ -9,8 +9,19 @@ const AdminPanel = () => {
   const [popupVisible, setPopupVisible] = useState(false);
 
   function addUser(newUser) {
-    setUsersList([...usersList, newUser])
-    setPopupVisible(false)
+    setUsersList([...usersList, newUser]);
+    setPopupVisible(false);
+  }
+
+  async function deleteUserFetch(userID) {
+    try {
+      if (confirm("Вы уверены, что хотите удалить пользователя?")) {
+        await axiosInstance.delete(`/users/${userID}`);
+        setUsersList(usersList.filter((user) => user.user_id !== userID))
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -42,8 +53,9 @@ const AdminPanel = () => {
         >
           Добавить пользователя
         </button>
+
         <Popup popupVisible={popupVisible} setPopupVisible={setPopupVisible}>
-          <AdminForm addUser={addUser} />
+          <AdminForm addUser={addUser} setPopupVisible={setPopupVisible} />
         </Popup>
       </div>
 
@@ -53,7 +65,7 @@ const AdminPanel = () => {
         <option value="admin">Admin</option>
       </select>
 
-      <AdminList usersList={usersList} />
+      <AdminList usersList={usersList} deleteUserFetch={deleteUserFetch} setPopupVisible={setPopupVisible} />
     </div>
   );
 };

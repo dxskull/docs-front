@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import React, { useEffect } from "react";
+import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "../../utils/axios";
 
-const AdminForm = ({ addUser }) => {
+const AdminForm = ({ addUser, setPopupVisible }) => {
   const {
     register,
     handleSubmit,
@@ -11,6 +12,7 @@ const AdminForm = ({ addUser }) => {
     trigger,
     formState: { errors },
   } = useForm();
+
   const password = watch("password");
 
   async function addUserFetch(registerData) {
@@ -42,7 +44,7 @@ const AdminForm = ({ addUser }) => {
   }, [password, trigger, watch]);
 
   return (
-    <>
+    <div className="admin-form-container">
       <h2 className="title admin-form__title">Добавить пользователя</h2>
       <form className="admin-form" onSubmit={handleSubmit(onSubmitForm)}>
         <div className="input-box">
@@ -128,11 +130,12 @@ const AdminForm = ({ addUser }) => {
               })}
             />
             <label htmlFor="admin" className="radio-label">
-              admin 
+              admin
             </label>
           </div>
-            {errors.role && <span className="error-message">{errors.role.message}</span>} 
-
+          {errors.role && (
+            <span className="error-message">{errors.role.message}</span>
+          )}
         </div>
 
         <div className="input-box">
@@ -182,7 +185,13 @@ const AdminForm = ({ addUser }) => {
           <button className="btn">Зарегестрировать пользователя</button>
         </div>
       </form>
-    </>
+      <IoMdClose
+        className="close-icon"
+        onClick={() => {
+          setPopupVisible(false);
+        }}
+      />
+    </div>
   );
 };
 
